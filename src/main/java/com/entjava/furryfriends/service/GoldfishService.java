@@ -5,6 +5,7 @@ import com.entjava.furryfriends.repository.GoldfishRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import java.util.Optional; // Import Optional
 
 @Service
 public class GoldfishService {
@@ -22,5 +23,9 @@ public class GoldfishService {
     public void deleteGoldfish(Long id) {
         goldfishRepository.deleteById(id);
     }
-}
 
+    // Add this method to find a goldfish by ID
+    public Optional<Goldfish> findGoldfishById(Long id) {
+        return goldfishRepository.findById(id);
+    }
+}

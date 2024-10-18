@@ -5,8 +5,12 @@ import com.entjava.furryfriends.service.SnailService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import com.entjava.furryfriends.model.ApiResponse;
+
 @RestController
-@RequestMapping("/snail")
+@RequestMapping("/snails")
 public class SnailController {
 
     private final SnailService snailService;
@@ -16,8 +20,18 @@ public class SnailController {
     }
 
     @GetMapping
-    public List<Snail> getAllSnails() {
-        return snailService.findAllSnails();
+    public ApiResponse<List<Snail>> getAllSnail() {
+        // Get the current authenticated user's username
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        // Fetch the list of snails using the instance variable
+        List<Snail> snails = snailService.findAllSnails();
+
+        // Create the response with data first and username second
+        ApiResponse<List<Snail>> response = new ApiResponse<>(snails, username);
+
+        return response; // Return the ApiResponse object
     }
 
     @PostMapping
@@ -30,4 +44,3 @@ public class SnailController {
         snailService.deleteSnail(id);
     }
 }
-
