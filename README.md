@@ -17,7 +17,7 @@
 ## Clone this Repository
 - Open your powershell/terminal and run:
     ```
-    git clone https://github.com/Dnzldotexe/furryfriends-entjava.git
+    git clone https://github.com/Meteornkr/furryfriends.git
     ```
 - Open your project in IntelliJ
 
